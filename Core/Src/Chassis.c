@@ -11,7 +11,6 @@
 #include "arm_math.h"
 #include "PID.h"
 #include "retarget.h"
-#include "Locator.h"
 #include "MID360.h"
 
 extern PID_t VisionRun2;
@@ -22,6 +21,7 @@ uint8_t AimPoints_Index;//目标点序号
 PointStruct Aim_Points[256];//目标点们
 PID_t Translation_PID, Turn_PID;//平动的PID结构体，转动的PID结构体
 uint8_t cnt;
+
 /** 用于存储比赛5个放球点 **/
 PointStruct Frame_Points[5]= {
         {.x = 0.24f,.y = 0.05f,.angle = 90.0f,.num = 0},
@@ -29,7 +29,7 @@ PointStruct Frame_Points[5]= {
         {.x = 0.23f,.y = 1.55f,.angle = 90.0f,.num = 0},
         {.x = 0.22f,.y = 2.31f,.angle = 90.0f,.num = 0},
         {.x = 0.20f,.y = 3.08f,.angle = 90.0f,.num = 0}
-};;
+};
 /** 用于存储比赛开始从1区跑到三区的目标点,有五个点 **/
 PointStruct Run1to3_Points[5] = {
         {.x = 0.0f,.y = 0.0f,.angle = 0.0f,.num = 0},
@@ -37,6 +37,14 @@ PointStruct Run1to3_Points[5] = {
         {.x = 0.0f,.y = 0.0f,.angle = 0.0f,.num = 0},
         {.x = 0.0f,.y = 0.0f,.angle = 0.0f,.num = 0},
         {.x = 0.0f,.y = 0.0f,.angle = 0.0f,.num = 0}
+};
+/** 2024.6.8 测试跑点 **/
+PointStruct Run1to3_Points_test[5] = {
+        {.x = 1.375f,.y = 5.959f,.angle = -0.4583f,.num = 0},
+        {.x = -0.046f,.y = 5.223f,.angle = 0.230f,.num = 0},
+        {.x = 3.828f,.y = 6.058f,.angle = -0.573f,.num = 0},
+        {.x = 3.902f,.y = 8.083f,.angle = -0.230f,.num = 0},
+        {.x = 3.902f,.y = 8.083f,.angle = -0.230f,.num = 0}//只有4个点
 };
 /**
  * @brief 四全向轮底层解算函数
@@ -80,23 +88,22 @@ void Chassis_Move(PointStruct *target_point)
     }
     //计算向量长度
     arm_sqrt_f32(err_x * err_x + err_y * err_y,&dis);
-
-    if( dis / all_dis >= 0.9 ) max_out = 1.0f;
+    //根据距离选取不同速度
+    if( dis / all_dis >= 0.9 ) max_out = 1.5f;
     else if( dis / all_dis >= 0.8 && dis / all_dis < 0.9 ) max_out = 2.0f;
-    else if( dis / all_dis >= 0.7 && dis / all_dis < 0.8 ) max_out = 3.0f;
+    else if( dis / all_dis >= 0.7 && dis / all_dis < 0.8 ) max_out = 2.5f;
     else if( dis / all_dis < 0.7 ) max_out = 3.0f;
     //计算平动速度向量
     vel = PID_Realise(&Translation_PID, 0, -dis, max_out, 0.01f);
     //速度向量取绝对值
     arm_abs_f32(&vel, &vel, 1);
     //计算角速度
-    omega = PID_Realise(&Turn_PID, 0, -delta_angle, 1.2f, 0.1f);
+    omega = PID_Realise(&Turn_PID, 0, -delta_angle, 1.3f, 0.1f);
 
     //线速度分解为x和y的分量
     xSpeed = vel * arm_cos_f32(atan2f(err_y, err_x));
     ySpeed = vel * arm_sin_f32(atan2f(err_y, err_x));
 
-//    printf("%f,%f,%f\n",xSpeed,ySpeed,omega);
     //将车身x，y速度转换为轮子的x，y速度
     SGW2Wheels(xSpeed, ySpeed, omega, LiDar.yaw);
 }
@@ -114,7 +121,7 @@ void Chassis_Move_OfVision(PointStruct *target_point)
     float delta_angle = (target_point->angle - LiDar.yaw);//角度差值
     float max_out = 0.0f,allErr_x = 0.0f,allErr_y = 0.0f;
     static float all_dis = 0.0f;
-
+    //计算距离
     if( cnt == 0 )
     {
         allErr_x = (target_point->x - LiDar.locx);
@@ -126,8 +133,8 @@ void Chassis_Move_OfVision(PointStruct *target_point)
     arm_sqrt_f32(err_x * err_x + err_y * err_y,&dis);
 
     if( dis / all_dis >= 0.9 ) max_out = 1.5f;
-    else if( dis / all_dis >= 0.8 && dis / all_dis < 0.9 ) max_out = 2.5f;
-    else if( dis / all_dis >= 0.7 && dis / all_dis < 0.8 ) max_out = 3.0f;
+    else if( dis / all_dis >= 0.8 && dis / all_dis < 0.9 ) max_out = 2.0f;
+    else if( dis / all_dis >= 0.7 && dis / all_dis < 0.8 ) max_out = 2.5f;
     else if( dis / all_dis < 0.7 ) max_out = 3.0f;
     //计算平动速度向量
     vel = PID_Realise(&VisionRun2, 0, -dis, max_out, 0.01f);
@@ -140,7 +147,6 @@ void Chassis_Move_OfVision(PointStruct *target_point)
     xSpeed = vel * arm_cos_f32(atan2f(err_y, err_x));
     ySpeed = vel * arm_sin_f32(atan2f(err_y, err_x));
 
-//    printf("%f,%f,%f\n",xSpeed,ySpeed,omega);
     //将车身x，y速度转换为轮子的x，y速度
     SGW2Wheels(xSpeed, ySpeed, omega, LiDar.yaw);
 }
