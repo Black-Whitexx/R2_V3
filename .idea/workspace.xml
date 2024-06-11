@@ -21,7 +21,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="34b94425-66d1-46ca-864f-7895646a8ede" name="Changes" comment="re-constructed">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/BSP/SPI.c" beforeDir="false" afterPath="$PROJECT_DIR$/User/BSP/SPI.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -138,7 +137,7 @@
       <workItem from="1718083159864" duration="4244000" />
       <workItem from="1718087432912" duration="1040000" />
       <workItem from="1718093142374" duration="2650000" />
-      <workItem from="1718098291174" duration="1694000" />
+      <workItem from="1718098291174" duration="1728000" />
     </task>
     <task id="LOCAL-00001" summary="re-constructed">
       <option name="closed" value="true" />
@@ -164,7 +163,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718099904473</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="re-constructed">
+      <option name="closed" value="true" />
+      <created>1718099991355</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1718099991355</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
