@@ -205,16 +205,16 @@ void SystemClock_Config(void)
   * @param  htim : TIM handle
   * @retval None
   */
-//void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-//{
-//  /* USER CODE BEGIN Callback 0 */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  /* USER CODE BEGIN Callback 0 */
 //  if (htim->Instance == TIM2 ) {
-//      /** 实际�??????? **/
+//      /** 实际�???????? **/
 //      Wheels_VelOut[0] = (int16_t)PID_Realise(&Wheels[0], -Wheels_vel[0], DjiMotor_Info[0].speed, M3508_CURRENT_MAX, 5);
 //      Wheels_VelOut[1] = (int16_t)PID_Realise(&Wheels[1], -Wheels_vel[1], DjiMotor_Info[1].speed, M3508_CURRENT_MAX, 5);
 //      Wheels_VelOut[2] = (int16_t)PID_Realise(&Wheels[2], -Wheels_vel[2], DjiMotor_Info[2].speed, M3508_CURRENT_MAX, 5);
 //      Wheels_VelOut[3] = (int16_t)PID_Realise(&Wheels[3], -Wheels_vel[3], DjiMotor_Info[3].speed, M3508_CURRENT_MAX, 5);
-//      /** 调试�??????? **/
+//      /** 调试�???????? **/
 ////      Wheels_VelOut[0] = PID_Realise(&Wheels[0],Wheels[0].target,Motor_Info[0].speed,M3508_CURRENT_MAX,5);
 ////      Wheels_VelOut[1] = PID_Realise(&Wheels[1],Wheels[1].target,Motor_Info[1].speed,M3508_CURRENT_MAX,5);
 ////      Wheels_VelOut[2] = PID_Realise(&Wheels[2],Wheels[2].target,Motor_Info[2].speed,M3508_CURRENT_MAX,5);
@@ -222,14 +222,14 @@ void SystemClock_Config(void)
 //
 //      Set_Current(&hfdcan1,0x200,Wheels_VelOut[0],Wheels_VelOut[1],Wheels_VelOut[2],Wheels_VelOut[3]);
 //  }
-//  /* USER CODE END Callback 0 */
-//  if (htim->Instance == TIM7) {
-//    HAL_IncTick();
-//  }
-//  /* USER CODE BEGIN Callback 1 */
+  /* USER CODE END Callback 0 */
+  if (htim->Instance == TIM7) {
+    HAL_IncTick();
+  }
+  /* USER CODE BEGIN Callback 1 */
 //
-//  /* USER CODE END Callback 1 */
-//}
+  /* USER CODE END Callback 1 */
+}
 
 /**
   * @brief  This function is executed in case of error occurrence.

@@ -59,6 +59,7 @@
 extern FDCAN_HandleTypeDef hfdcan1;
 extern FDCAN_HandleTypeDef hfdcan2;
 extern FDCAN_HandleTypeDef hfdcan3;
+extern SPI_HandleTypeDef hspi4;
 extern TIM_HandleTypeDef htim2;
 extern DMA_HandleTypeDef hdma_uart4_rx;
 extern DMA_HandleTypeDef hdma_uart5_rx;
@@ -278,15 +279,15 @@ void TIM2_IRQHandler(void)
 void USART1_IRQHandler(void)
 {
   /* USER CODE BEGIN USART1_IRQn 0 */
-//    if(RESET != __HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE))   //判断是否是空闲中�??????????????????
+//    if(RESET != __HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE))   //判断是否是空闲中�???????????????????
 //    {
-    __HAL_UART_CLEAR_IDLEFLAG(&huart1);                     //清除空闲中断标志（否则会�??????????????????直不断进入中断）
+    __HAL_UART_CLEAR_IDLEFLAG(&huart1);                     //清除空闲中断标志（否则会�???????????????????直不断进入中断）
     HAL_UART_DMAStop(&huart1);                        //停止DMA接收
 
-    VOFA_SetPID(&Slope_Speed_t,&Slope_Position_t);          //对串口接收数据进行解�???????????????
+    VOFA_SetPID(&Slope_Speed_t,&Slope_Position_t);          //对串口接收数据进行解�????????????????
 
     HAL_UART_Receive_DMA(&huart1, USART1_Buffer, 255);   //重启串口接收中断，开始DMA传输
-    __HAL_UART_ENABLE_IT(&huart1,UART_IT_IDLE);             //重启串口空闲中断，防止被32自动清除标志空闲中断标志�??????????????????
+    __HAL_UART_ENABLE_IT(&huart1,UART_IT_IDLE);             //重启串口空闲中断，防止被32自动清除标志空闲中断标志�???????????????????
 //    }
   /* USER CODE END USART1_IRQn 0 */
   HAL_UART_IRQHandler(&huart1);
@@ -301,15 +302,15 @@ void USART1_IRQHandler(void)
 void USART2_IRQHandler(void)
 {
   /* USER CODE BEGIN USART2_IRQn 0 */
-//  if(RESET != __HAL_UART_GET_FLAG(&huart2, UART_FLAG_IDLE))   //判断是否是空闲中�??????????????????
+//  if(RESET != __HAL_UART_GET_FLAG(&huart2, UART_FLAG_IDLE))   //判断是否是空闲中�???????????????????
 // {
-      __HAL_UART_CLEAR_IDLEFLAG(&huart2);                     //清除空闲中断标志（否则会�??????????????????直不断进入中断）
+      __HAL_UART_CLEAR_IDLEFLAG(&huart2);                     //清除空闲中断标志（否则会�???????????????????直不断进入中断）
       HAL_UART_DMAStop(&huart2);                        //停止DMA接收
 
       RaDar_Data_Rec(USART2_Buffer, &LiDar, &Vision_Data);
 
       HAL_UART_Receive_DMA(&huart2, USART2_Buffer, 50);   //重启串口接收中断，开始DMA传输
-      __HAL_UART_ENABLE_IT(&huart2, UART_IT_IDLE);             //重启串口空闲中断，防止被32自动清除标志空闲中断标志�??????????????????
+      __HAL_UART_ENABLE_IT(&huart2, UART_IT_IDLE);             //重启串口空闲中断，防止被32自动清除标志空闲中断标志�???????????????????
 // }
   /* USER CODE END USART2_IRQn 0 */
   HAL_UART_IRQHandler(&huart2);
@@ -324,11 +325,11 @@ void USART2_IRQHandler(void)
 void USART3_IRQHandler(void)
 {
   /* USER CODE BEGIN USART3_IRQn 0 */
-    __HAL_UART_CLEAR_IDLEFLAG(&huart3);                     //清除空闲中断标志（否则会�??????????????????直不断进入中断）
+    __HAL_UART_CLEAR_IDLEFLAG(&huart3);                     //清除空闲中断标志（否则会�???????????????????直不断进入中断）
     HAL_UART_DMAStop(&huart3);                        //停止DMA接收
 
     HAL_UART_Receive_DMA(&huart3, USART3_Buffer, 30);   //重启串口接收中断，开始DMA传输
-    __HAL_UART_ENABLE_IT(&huart3,UART_IT_IDLE);             //重启串口空闲中断，防止被32自动清除标志空闲中断标志�??????????????????
+    __HAL_UART_ENABLE_IT(&huart3,UART_IT_IDLE);             //重启串口空闲中断，防止被32自动清除标志空闲中断标志�???????????????????
   /* USER CODE END USART3_IRQn 0 */
   HAL_UART_IRQHandler(&huart3);
   /* USER CODE BEGIN USART3_IRQn 1 */
@@ -356,15 +357,15 @@ void UART4_IRQHandler(void)
 void UART5_IRQHandler(void)
 {
   /* USER CODE BEGIN UART5_IRQn 0 */
-//    if(RESET != __HAL_UART_GET_FLAG(&huart5, UART_FLAG_IDLE))   //判断是否是空闲中�??????????????????
+//    if(RESET != __HAL_UART_GET_FLAG(&huart5, UART_FLAG_IDLE))   //判断是否是空闲中�???????????????????
 //    {
-    __HAL_UART_CLEAR_IDLEFLAG(&huart5);                     //清除空闲中断标志（否则会�??????????????????直不断进入中断）
+    __HAL_UART_CLEAR_IDLEFLAG(&huart5);                     //清除空闲中断标志（否则会�???????????????????直不断进入中断）
     HAL_UART_DMAStop(&huart5);                        //停止DMA接收
 
-    locater_Data_Rec(USART5_Buffer,&locater);          //对串口接收数据进行解�???????????????
+    locater_Data_Rec(USART5_Buffer,&locater);          //对串口接收数据进行解�????????????????
 
     HAL_UART_Receive_DMA(&huart5, USART5_Buffer, 255);   //重启串口接收中断，开始DMA传输
-    __HAL_UART_ENABLE_IT(&huart5,UART_IT_IDLE);             //重启串口空闲中断，防止被32自动清除标志空闲中断标志�??????????????????
+    __HAL_UART_ENABLE_IT(&huart5,UART_IT_IDLE);             //重启串口空闲中断，防止被32自动清除标志空闲中断标志�???????????????????
 //    }
   /* USER CODE END UART5_IRQn 0 */
   HAL_UART_IRQHandler(&huart5);
@@ -385,6 +386,20 @@ void TIM7_DAC_IRQHandler(void)
   /* USER CODE BEGIN TIM7_DAC_IRQn 1 */
 
   /* USER CODE END TIM7_DAC_IRQn 1 */
+}
+
+/**
+  * @brief This function handles SPI4 global interrupt.
+  */
+void SPI4_IRQHandler(void)
+{
+  /* USER CODE BEGIN SPI4_IRQn 0 */
+
+  /* USER CODE END SPI4_IRQn 0 */
+  HAL_SPI_IRQHandler(&hspi4);
+  /* USER CODE BEGIN SPI4_IRQn 1 */
+
+  /* USER CODE END SPI4_IRQn 1 */
 }
 
 /**

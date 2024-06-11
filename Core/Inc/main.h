@@ -54,19 +54,19 @@ extern uint8_t USART5_Buffer[256];
 
 extern PID_t Wheels[4];//轮子转�??
 extern float Wheels_vel[4];//轮子转�??
-extern PID_t Translation_PID, Turn_PID;//平动的PID结构体，转动的PID结构�??????????
+extern PID_t Translation_PID, Turn_PID;//平动的PID结构体，转动的PID结构�???????????
 
 extern PointStruct Aim_Points[256],Frame_Points[5];//目标点们
-extern uint8_t AimPoints_Index;//目标点序�?????????
+extern uint8_t AimPoints_Index;//目标点序�??????????
 
-// MotorInfo_t DjiMotor_Info[MOTOR_NUM];//大疆电机返回的数据数�????????????
+// MotorInfo_t DjiMotor_Info[MOTOR_NUM];//大疆电机返回的数据数�?????????????
 
 extern uint8_t Control_Mode;
 extern uint8_t State,Store_Flag,Vision_State;
 
 extern uint8_t cnt;
 
-extern PointStruct Run1to3_Points[5];//用于存储比赛�?????????始从1区跑到三区的目标�?????????,有五个点
+extern PointStruct Run1to3_Points[5];//用于存储比赛�??????????始从1区跑到三区的目标�??????????,有五个点
 
 extern PID_t Slope_Speed_t,Slope_Position_t,Toggle_Speed_t,Toggle_Position_t;
 extern PID_t Left_Speed_t,Right_Speed_t;
@@ -137,9 +137,9 @@ void Error_Handler(void);
 
 #define Left_Spe 7000 //左边电机旋转
 #define Right_Spe (-7000) //右边电机旋转
-#define Toggle_Down 0 //夹爪翻下�??????
+#define Toggle_Down 0 //夹爪翻下�???????
 #define Toggle_Mid 1300 //夹爪归中
-#define Toggle_Up 3000 //夹爪翻上�??????
+#define Toggle_Up 3000 //夹爪翻上�???????
 #define Slope_Left (-450.0f) //平台向左倾斜
 #define Slope_Right 450.0f //平台向右倾斜
 

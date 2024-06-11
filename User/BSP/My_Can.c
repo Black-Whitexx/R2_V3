@@ -14,7 +14,7 @@ Can_Frame fdcan2_buffer[Can2Peripheral_NUM];
 Can_Frame fdcan3_buffer[Can3Peripheral_NUM];
 
 uint8_t MyCan_ReadData(FDCAN_HandleTypeDef *hcan,uint32_t id,uint8_t *data){
-    if(hcan == &hfdcan1){
+    if(hcan->Instance == FDCAN1){
         for (int i = 0; i < Can1Peripheral_NUM; i++) {
             if (fdcan1_buffer[i].id == id) {
                 copyArray(fdcan1_buffer[i].data,data,8);
@@ -23,7 +23,7 @@ uint8_t MyCan_ReadData(FDCAN_HandleTypeDef *hcan,uint32_t id,uint8_t *data){
         }
         return 1;
     }
-    if(hcan == &hfdcan2){
+    if(hcan->Instance == FDCAN2){
         for (int i = 0; i < Can2Peripheral_NUM; i++) {
             if (fdcan2_buffer[i].id == id) {
                 copyArray(fdcan2_buffer[i].data,data,8);
@@ -32,7 +32,7 @@ uint8_t MyCan_ReadData(FDCAN_HandleTypeDef *hcan,uint32_t id,uint8_t *data){
         }
         return 1;
     }
-    if(hcan == &hfdcan3){
+    if(hcan->Instance == FDCAN3){
         for (int i = 0; i < Can3Peripheral_NUM; i++) {
             if (fdcan3_buffer[i].id == id) {
                 copyArray(fdcan3_buffer[i].data,data,8);

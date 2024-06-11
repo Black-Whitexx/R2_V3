@@ -222,7 +222,7 @@ void DebugTask(void const * argument)
 
 /* USER CODE BEGIN Header_RoboRunTask */
 /**
-* @brief 此任务用于R2跑点或�?�遥�????????????
+* @brief 此任务用于R2跑点或�?�遥�?????????????
 * @param argument: Not used
 * @retval None
 */
@@ -270,7 +270,7 @@ void RoboRunTask(void const * argument)
 
 /* USER CODE BEGIN Header_NRFTask */
 /**
-* @brief 此函数用于接收遥控器的数�?
+* @brief 此函数用于接收遥控器的数�??
 * @param argument: Not used
 * @retval None
 */
@@ -287,7 +287,7 @@ void NRFTask(void const * argument)
   {
       if (NRF24L01_RxPacket(rc_data) == 0)  //接收遥控器数据，若收到返0，若没收到返1
       {
-          /** 读取左右摇杆值，限制�?-128~128 **/
+          /** 读取左右摇杆值，限制�??-128~128 **/
           RemoteRX.lx = (int16_t)-(rc_data[1] - 128);
           RemoteRX.ly = (int16_t)-(rc_data[2] - 128);
           RemoteRX.rx = (int16_t)-(rc_data[3] - 128);
@@ -309,11 +309,11 @@ void NRFTask(void const * argument)
 
           /** 对遥控器按键命令进行响应 **/
           switch (RemoteRX.command) {
-              case Left_Up_Up://切换成手动模�?
+              case Left_Up_Up://切换成手动模�??
                   Control_Mode = Manual_Mode;
                   vTaskResume(RoboRun_TaskHandle);
                   break;
-              case Left_Up://�?键启�?
+              case Left_Up://�??键启�??
                   SUCTION_ON;  /** 伸出吸球机构 **/
                   Toggle_Pos = Toggle_Mid; /** 夹爪翻到中位 **/
                   osDelay(500);     /** 避免夹爪提前打开 **/
@@ -344,7 +344,7 @@ void NRFTask(void const * argument)
 
 /* USER CODE BEGIN Header_ControlTask */
 /**
-* @brief 此任务用于运动状态的判断切换跑点模式或视觉追踪模�???
+* @brief 此任务用于运动状态的判断切换跑点模式或视觉追踪模�????
 * @param argument: Not used
 * @retval None
 */
@@ -356,7 +356,7 @@ void ControlTask(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-      /** 对当前状态做出反�? **/
+      /** 对当前状态做出反�?? **/
         switch (State) {
             case Default_State:
                 break;
@@ -379,7 +379,7 @@ void ControlTask(void const * argument)
 //                vTaskResume(RoboRun_TaskHandle);
 //                while (State == Run2Store_State){ osDelay(1);}
                 break;
-            case TakeRightBall_State:/** 取正确的�??? **/
+            case TakeRightBall_State:/** 取正确的�???? **/
                 osDelay(500);
                 CLAW_ON;//关闭夹爪
                 cnt = 0;
@@ -397,7 +397,7 @@ void ControlTask(void const * argument)
                 CLAW_OFF;//打开夹爪
                 osDelay(1000);//等待球滚出去
                 State = Run2Get_State;//状�?�切换为Run2Get_State
-                Toggle_Pos = Toggle_Mid;//夹爪回中�???
+                Toggle_Pos = Toggle_Mid;//夹爪回中�????
                 SUCTION_ON;//吸球机构推出
                 break;
             default:
@@ -410,7 +410,7 @@ void ControlTask(void const * argument)
 
 /* USER CODE BEGIN Header_HandleBallTask */
 /**
-* @brief 此任务用于控制电机实现左右拨球或者夹�????????????/放球，控�????????????3�????????????2006和一�????????????3508电机、两个气�????????????
+* @brief 此任务用于控制电机实现左右拨球或者夹�?????????????/放球，控�?????????????3�?????????????2006和一�?????????????3508电机、两个气�?????????????
 * @param argument: Not used
 * @retval None
 */
@@ -441,7 +441,7 @@ void HandleBallTask(void const * argument)
 /* USER CODE BEGIN Header_SuctionTask */
 /**
 * @bri
- * ef 此任务用于吸球，控制VESC电调驱动�????????????�????????????5065电机
+ * ef 此任务用于吸球，控制VESC电调驱动�?????????????�?????????????5065电机
 * @param argument: Not used
 * @retval None
 */
@@ -464,7 +464,7 @@ void SuctionTask(void const * argument)
 
 /* USER CODE BEGIN Header_Run1to3Task */
 /**
-* @brief 此任务用于比赛开始时R2�??1区跑�??3�??
+* @brief 此任务用于比赛开始时R2�???1区跑�???3�???
 * @param argument: Not used
 * @retval None
 */
@@ -511,7 +511,7 @@ void VisionTask(void const * argument)
   {
       if( xQueueReceive(VisionData_QueueHandle,&visiondata,0) == pdTRUE )
       {
-          if (visiondata.flag == 1)//在黄区找到球了
+          if (visiondata.flag == 1)//在黄区找到球�?
           {
               printf("1,1\n");
               cnt = 0;
@@ -528,17 +528,17 @@ void VisionTask(void const * argument)
                       OpenSuction();
                       Toggle_Pos = Toggle_Down;/** 夹爪放下来，平台回正 **/
                       Slope_Pos = 0;
-                      osDelay(100);/** 前进一段时间后停车 **/
+                      osDelay(100);/** 前进�?段时间后停车 **/
                       Car_Stop;
                       break;
-                  case 2:/** 快进来的是无效球，停车等待球吐出去 **/
+                  case 2:/** 快进来的是无效球，停车等待球吐出�? **/
                       printf("2,2\n");
                       OpenSuction();
-                      Toggle_Pos = Toggle_Mid;/** 爪子回中位 **/
-                      osDelay(100);/** 前进一段时间后停车 **/
+                      Toggle_Pos = Toggle_Mid;/** 爪子回中�? **/
+                      osDelay(100);/** 前进�?段时间后停车 **/
                       Car_Stop;
                       break;
-                  case 0:/** 跟踪球 **/
+                  case 0:/** 跟踪�? **/
                       printf("2,0\n");
                       OpenSuction();
                       if (Vision_State != Vision_Delay) {
@@ -585,7 +585,7 @@ void VisionTask(void const * argument)
                       Car_Stop;
                       Toggle_Pos = Toggle_Mid;
                       break;
-                  case 3:/** 视野里没有球，向后退 **/
+                  case 3:/** 视野里没有球，向后�?? **/
                       printf("3,3\n");
                       Vision_State = Vision_FindBall;
                       State = Run2Get_State2;
@@ -605,7 +605,7 @@ void VisionTask(void const * argument)
 
 /* USER CODE BEGIN Header_VisionRunTask */
 /**
-* @brief 该任务是视觉跑点，由于对精度要求不高且�?�度要求高，�??以单�??�??个任�??
+* @brief 该任务是视觉跑点，由于对精度要求不高且�?�度要求高，�???以单�???�???个任�???
 * @param argument: Not used
 * @retval None
 */
@@ -621,7 +621,7 @@ void VisionRunTask(void const * argument)
     {
         cnt = 0;
         Car_Stop;
-        if( (Vision_State == Vision_FindBall) || (State == Run2Get_State) || State == (Run2Get_State2)) /** 从黄区到绿区的跑点，用于去找球，到点后启动5065，开启视觉任务 **/
+        if( (Vision_State == Vision_FindBall) || (State == Run2Get_State) || State == (Run2Get_State2)) /** 从黄区到绿区的跑点，用于去找球，到点后启�?5065，开启视觉任�? **/
         {
             Slope_Pos = Slope_Left;//平台倾斜
             Left_TargetSpe = Left_Spe;//2006旋转
@@ -678,12 +678,12 @@ void StartTask(void const * argument)
             {
                 Car_Stop;    /** 停车 **/
                 Slope_Pos = Slope_Left; /** 平台向左倾斜 **/
-                Left_TargetSpe = Left_Spe; /** 2006旋
- * 转 **/
+                Left_TargetSpe = Left_Spe; /** 2006�?
+ * �? **/
                 OpenSuction();
                 vTaskResume(Vision_TaskHandle);
                 osDelay(34);
-                /** 发一个信号给摄像头 **/
+                /** 发一个信号给摄像�? **/
                 vision_cmd = 0x01;
                 HAL_UART_Transmit(&huart2,&vision_cmd, sizeof(vision_cmd),0xFFFFF);
                 /** 挂起自己 **/
