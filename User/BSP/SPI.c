@@ -15,7 +15,8 @@ uint8_t SPI_Read(SPI_HandleTypeDef *spi,uint8_t *data){
 }
 
 uint8_t SPI_Write(SPI_HandleTypeDef *spi,uint8_t *data){
-    if(HAL_UART_Transmit(spi,data,32,500));
+    while(HAL_OK == HAL_SPI_Transmit(spi,data,32,500));
+    return 0;
 }
 
 void HAL_SPI_IRQHandler(SPI_HandleTypeDef *hspi){
