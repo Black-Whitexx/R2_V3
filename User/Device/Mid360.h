@@ -2,7 +2,7 @@
 // Created by BxW on 2024/6/11.
 //
 
-#ifndef R2_MASTER_V3_MID360_H
+#ifndef R2_MASTER_V3_MID360__H
 #define R2_MASTER_V3_MID360_H
 #define R 0.28432f
 
@@ -22,9 +22,9 @@ typedef struct
     uint8_t flag;
     float vision_x;
     float vision_y;
-}Vision_Frame;
+}RS_Frame;
 
 uint8_t Mid360_Set();
-uint8_t Mid360_Get();
+uint8_t Mid360_Get(RaDar_Frame *raDarFrame, RS_Frame *rs_Frame);
 
-#endif //R2_MASTER_V3_MID360_H
+#endif //R2_MASTER_V3_MID360__H

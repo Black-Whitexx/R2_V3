@@ -4,7 +4,7 @@
 
 #include "Dji_Motor.h"
 #include "global_Inc.h"
-#include "My_Can.h"
+//#include "My_Can.h"
 //extern uint8_t fdcan_buffer[MOTOR_NUM][8];//从下层MYCAN文件中引用全局变量，进行处理
 
 /**

@@ -11,13 +11,13 @@
 #include "math.h"
 #include "retarget.h"
 
-PID_t Slope_Speed_t,Slope_Position_t,Toggle_Speed_t,Toggle_Position_t;
-PID_t Left_Speed_t,Right_Speed_t;
+PID_Para Slope_Speed_t,Slope_Position_t,Toggle_Speed_t,Toggle_Position_t;
+PID_Para Left_Speed_t,Right_Speed_t;
 /**
   * @brief  PID参数设置，全是float，去除了积分分离，感觉有点冗余而且不会用
   * @param  *PID 要设置的目标PID结构体地址
   */
-void PID_Set(PID_t *PID, float kp, float ki, float kd, float integral_limit)
+void PID_Set(PID_Para *PID, float kp, float ki, float kd, float integral_limit)
 {
     PID->integral_limit = integral_limit;
     PID->Kp = kp;
@@ -43,7 +43,7 @@ void PID_Set(PID_t *PID, float kp, float ki, float kd, float integral_limit)
   * @param  max_output PID输出限幅（绝对值）
   * @return PID输出
   */
-float PID_Realise(PID_t *PID, float target, float current, float max_output, float DeadZone)
+float PID_Process(PID_Para *PID, float target, float current, float max_output, float DeadZone)
 {
     PID->target = target;
     PID->current = current;

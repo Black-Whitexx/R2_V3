@@ -22,13 +22,13 @@ uint8_t NRFHeartBeat = 0;
 void NRF_Write(uint8_t *data){
     uint8_t status, uint8_t_ctr;
     CS_LOW;                                   //ʹ��SPI����
-    status = SPIx_ReadWriteByte(&hspi4, reg); //���ͼĴ���ֵ(λ��),����ȡ״ֵ̬
-    for (uint8_t_ctr = 0; uint8_t_ctr < len; uint8_t_ctr++)
-    {
-        pBuf[uint8_t_ctr] = SPIx_ReadWriteByte(&hspi4, 0XFF); //��������
-    }
-    CS_HIGH;       //�ر�SPI����
-    return status; //���ض�����״ֵ̬
+    //status = SPIx_ReadWriteByte(&hspi4, reg); //���ͼĴ���ֵ(λ��),����ȡ״ֵ̬
+//    for (uint8_t_ctr = 0; uint8_t_ctr < len; uint8_t_ctr++)
+//    {
+//        //pBuf[uint8_t_ctr] = SPIx_ReadWriteByte(&hspi4, 0XFF); //��������
+//    }
+//    CS_HIGH;       //�ر�SPI����
+//    return status; //���ض�����״ֵ̬
 }
 void NRF_Read(uint8_t *data);
 

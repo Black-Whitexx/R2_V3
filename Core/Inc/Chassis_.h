@@ -8,8 +8,8 @@
   ******************************************************************************
   */
 
-#ifndef R2_MASTER_V3_CHASSIS_H
-#define R2_MASTER_V3_CHASSIS_H
+#ifndef R2_MASTER_V3_CHASSIS__H
+#define R2_MASTER_V3_CHASSIS__H
 #include "stm32g4xx_hal.h"
 
 #define angle2rad 0.0174532925f
@@ -27,9 +27,9 @@ typedef struct
 }PointStruct;
 
 void SGW2Wheels(float vel_x, float vel_y, float omega, float theta);
-void Chassis_Move(PointStruct *target_point);
+//void Chassis_Move(PointStruct *target_point);
 void Chassis_Move_OfVision(PointStruct *target_point);
 float Distance_Calc(PointStruct point, float x, float y);
 void Set_Point(PointStruct *point,float x,float y,float angle,uint8_t num);
 
-#endif //R2_MASTER_V3_CHASSIS_H
+#endif //R2_MASTER_V3_CHASSIS__H

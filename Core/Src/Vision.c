@@ -9,8 +9,8 @@
   */
 #include "Vision.h"
 #include "PID.h"
-#include "Chassis.h"
-#include "MID360.h"
+#include "Chassis_.h"
+#include "MID360_.h"
 #include "FreeRTOS.h"
 #include "task.h"
 #include "queue.h"
@@ -19,7 +19,7 @@
 #include "main.h"
 
 VisionStruct Vision_Data;
-PID_t VisionPID_X,VisionRun2;
+PID_Para VisionPID_X,VisionRun2;
 PointStruct Vision_Points[256];
 uint8_t Vision_State;
 

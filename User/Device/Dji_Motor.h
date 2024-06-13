@@ -5,7 +5,7 @@
 #ifndef R2_MASTER_V3_DJI_MOTOR_H
 #define R2_MASTER_V3_DJI_MOTOR_H
 #include "stm32g4xx.h"
-
+#include "My_Can.h"
 //描述大疆电机的状态和相关中间变量
 typedef struct
 {
